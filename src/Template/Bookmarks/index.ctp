@@ -15,11 +15,40 @@ $user_data = $session->read('Auth.User');
         <?php if($user_data['type']=='admin') : ?>
             <li><?= $this->Html->link(__('All Cars'), ['controller' => 'Cars', 'action' => 'all']) ?></li>
 		<?php endif; ?>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Tags'), ['controller' => 'Tags', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Tag'), ['controller' => 'Tags', 'action' => 'add']) ?></li>
     </ul>
+    <div style="margin-top:100px">
+        <?php
+          $map_options = array(
+            'id' => 'map_canvas',
+            'width' => '290px',
+            'height' => '450px',
+            'style' => '',
+            'zoom' => 15,
+            'type' => 'ROADMAP',
+            'custom' => null,
+            'localize' => true,
+            'latitude' => -23.55165284,
+            'longitude' => -46.68247116,
+            'address' => 'Rua Cristiano Viana, 1399',
+            'marker' => true,
+            'markerTitle' => 'This is my position',
+            'markerIcon' => 'http://labs.google.com/ridefinder/images/mm_20_purple.png',
+            'markerShadow' => 'http://labs.google.com/ridefinder/images/mm_20_purpleshadow.png',
+            'infoWindow' => true,
+            'windowText' => 'My Position',
+            'draggableMarker' => false
+          );
+        $marker_options = array(
+          'showWindow' => true,
+          'windowText' => '<a href="Users/view/2">Users</a>',
+          'markerTitle' => 'Github',
+          'draggableMarker' => true
+        );
+        ?>
+        <?= $this->Html->script('http://maps.google.com/maps/api/js?key=AIzaSyB5N7JcG5jyCWIvzzRkQfFx78Vkfw0J54I', [false]); ?>
+        <?= $this->GoogleMap->map($map_options); ?>
+        <?= $this->GoogleMap->addMarker('map_canvas', 1, array('latitude' => -23.55265284, 'longitude' => -46.68447116), $marker_options); ?>
+    </div>
 </nav>
 <div class="bookmarks index large-9 medium-8 columns content">
     <h3><?= __('Bookmarks') ?></h3>

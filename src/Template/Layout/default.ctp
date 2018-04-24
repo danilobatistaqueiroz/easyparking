@@ -48,15 +48,23 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href="Users/view/<?= $user_data['id'] ?>"><?= $user_data['name'] ?></a></h1>
+                <h1><a href="">Quartos</a></h1>
             </li>
         </ul>
         <div class="top-bar-section">
+			<ul class="left">
+				<li><a href="">Quartos para Alugar</a></li>
+				<li><a href="">Coloque para Alugar</a></li>
+			</ul>
             <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">APIs<?=$user_data['id']?></a></li>
+				<li><a href="Help/howitworks">Como funciona</a></li>
+                <li><a href="/contact">Contato</a></li>
+				<?php if($logged==false) : ?>
+					<li><a href="Users/add">Cadastro</a></li>
+                    <li><a href="Users/login">Entrar</a></li>
+				<?php endif; ?>
 				<?php if($logged==true) : ?>
-					<li><a href="/users/logout">logout</a></li>
+					<li><a href="users/logout">Sair</a></li>
 				<?php endif; ?>
             </ul>
         </div>

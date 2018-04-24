@@ -58,7 +58,7 @@ $cakeDescription = 'Quartos : Encontre um quarto ou ganhe dinheiro com seu quart
 			</ul>
             <ul class="right">
 				<li><a href="Help/howitworks">Como funciona</a></li>
-                <li><a href="Help/contact">Contato</a></li>
+                <li><a href="/contact">Contato</a></li>
 				<?php if($logged==false) : ?>
 					<li><a href="Users/add">Cadastro</a></li>
                     <li><a href="Users/login">Entrar</a></li>

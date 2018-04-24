@@ -7,8 +7,14 @@ use App\Form\ContactForm;
 
 class ContactController extends AppController
 {
-    public function index()
+    public function initialize()
     {
+        parent::initialize();
+        $this->Auth->allow();
+    }
+    
+    public function index()
+    {        
         $contact = new ContactForm();
         if ($this->request->is('post')) {
             if ($contact->execute($this->request->getData())) {
@@ -18,9 +24,12 @@ class ContactController extends AppController
             }
         }
         if ($this->request->is('get')) {
-            // Values from the User Model e.g.
-            $this->request->data('name', 'John Doe');
-            $this->request->data('email','john.doe@example.com');
+            $session = $this->request->getSession();
+            $user_data = $session->read('Auth.User');
+            if(!empty($user_data)){
+                $this->request->data['name'] = $user_data['name'];
+                $this->request->data['email'] = $user_data['email'];
+            }
         }
         $this->set('contact', $contact);
     }

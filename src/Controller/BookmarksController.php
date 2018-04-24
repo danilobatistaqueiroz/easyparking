@@ -15,7 +15,7 @@ class BookmarksController extends AppController
 {
 
 	public $components = array('Paginator');
-	
+	public $helpers = array('GoogleMap');
 	
     /**
      * Index method
@@ -24,18 +24,18 @@ class BookmarksController extends AppController
      */
     public function index()
     {
+        
         $this->paginate = [
             'contain' => ['Users'],
 			'maxLimit' => 7
         ];
         
-        $bookmarks = $this->paginate($this->Bookmarks);
+        //$bookmarks = $this->paginate($this->Bookmarks);
 		
-		$query = $this->Bookmarks->find('search', ['search' => $this->request->getQueryParams()]);
-
-			//Log::write('debug'," ");
-			//Log::write('debug',"query::".$query);
-			//Log::write('debug'," \r\n ");
+		//$query = $this->Bookmarks->find('search', ['search' => $this->request->getQueryParams()]);
+		//Log::write('debug'," ");
+		//Log::write('debug',"query::".$query);
+		//Log::write('debug'," \r\n ");
 			
 		$this->set('bookmarks', $this->paginate($query));
 		
