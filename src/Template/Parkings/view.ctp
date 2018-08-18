@@ -55,4 +55,14 @@
             <td><?= h($parking->modified) ?></td>
         </tr>
     </table>
+    <?= $this->Form->create(null, ['type' => 'put', 'url' => ['controller' => 'Parkings', 'action' => 'solicitar']]) ?>
+    <fieldset>
+        <?php
+            echo $this->Form->control('owner_id', ['type' => 'hidden']);
+            echo $this->Form->control('id', ['type' => 'hidden']);
+            echo $this->Form->control('solicitar', ['type' => 'hidden', 'value' => 'aluguel']);
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
 </div>

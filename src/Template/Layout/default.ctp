@@ -37,6 +37,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 		$logged = false;
 		$session = $this->request->getSession();
         $user_data = $session->read('Auth.User');
+		$user_id = $user_data["id"];
         if(!empty($user_data)){
             //print_r($user_data);
 			$logged = true;
@@ -48,28 +49,33 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href="">Quartos</a></h1>
+				<?php if($logged==true): ?>
+					<h1><a href="/Users/view/<?= $user_id ?>">Seu Cadastro </a></h1>
+				<?php endif; ?>
+				<?php if($logged==false): ?>
+					<h1><a href="/">Estacionamentos</a></h1>
+				<?php endif; ?>
             </li>
         </ul>
         <div class="top-bar-section">
 			<ul class="left">
-				<li><a href="">Quartos para Alugar</a></li>
-				<li><a href="">Coloque para Alugar</a></li>
+				<li><a href="/Parkings">Quartos Dispon&#x00ed;veis para Alugar</a></li>
+				<li><a href="/Parkings/add">Anuncie o Teu para Alugar</a></li>
 			</ul>
             <ul class="right">
 				<li><a href="Help/howitworks">Como funciona</a></li>
                 <li><a href="/contact">Contato</a></li>
 				<?php if($logged==false) : ?>
-					<li><a href="Users/add">Cadastro</a></li>
-                    <li><a href="Users/login">Entrar</a></li>
+					<li><a href="/Users/add">Cadastro</a></li>
+                    <li><a href="/Users/login">Entrar</a></li>
 				<?php endif; ?>
 				<?php if($logged==true) : ?>
-					<li><a href="users/logout">Sair</a></li>
+					<li><a href="/Users/logout">Sair</a></li>
 				<?php endif; ?>
             </ul>
         </div>
     </nav>
-    <?= $this->Flash->render() ?>
+    <?= $this->Flash->render('auth') ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>
     </div>

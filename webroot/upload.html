@@ -1,0 +1,76 @@
+<html>
+<head>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <style>
+	img {
+		border: 1px solid #ddd; /* Gray border */
+		border-radius: 4px;  /* Rounded border */
+		padding: 5px; /* Some padding */
+		width: 150px; /* Set a small width */
+	}
+
+	/* Add a hover effect (blue shadow) */
+	img:hover {
+		box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+	}
+	.dimg{
+		border:1px solid #ddd;width: 500px;
+	}
+	.display{
+		width:200; text-align:left
+	}
+	.gallery2{
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-width:2px;
+		border-style:solid;
+		border-color:#1798A5;
+		padding: 10;
+		margin-top: 5;
+	}
+    </style>
+</head>
+<body>
+<form action="upload.php" name="myform" id="myform" method="post" enctype="multipart/form-data">
+    <input id="btnFileChoices" type="button" value="Escolher Arquivos" />
+    <div id="divFileChoices" style="display:none" class="gallery2">
+        <div class="dimg">
+            <img id="imager1" src="" alt="" style="visibility:hidden">
+            <input type="file" name="upload1" id="upload1" style="display:none" >
+            <div style="display:inline">
+              <input id="files" style="visibility:hidden;" type="file">
+              <input id="btnFileUpload1" type="button" value="escolha uma foto" style="float:left;"/>
+              <input class="display" type="text" id="arquivo1" value="" readonly style="clear:both;"/>
+              <input type="button" id="remover1" value="remover" disabled />
+            </div>
+        </div>
+        <div class="dimg">
+            <img id="imager2" src="" alt="" style="visibility:hidden">
+            <input type="file" name="upload2" id="upload2" style="display:none" >
+            <div style="display:inline">
+              <input id="files" style="visibility:hidden;" type="file">
+              <input id="btnFileUpload2" type="button" value="escolha uma foto" style="float:left;"/>
+              <input class="display" type="text" id="arquivo2" value="" readonly style="clear:both;"/>
+              <input type="button" id="remover2" value="remover" disabled />
+            </div>
+        </div>
+        <div class="dimg">
+            <img id="imager3" src="" alt="" style="visibility:hidden">
+            <input type="file" name="upload3" id="upload3" style="display:none" >
+            <div style="display:inline">
+              <input id="files" style="visibility:hidden;" type="file">
+              <input id="btnFileUpload3" type="button" value="escolha uma foto" style="float:left;"/>
+              <input class="display" type="text" id="arquivo3" value="" readonly style="clear:both;"/>
+              <input type="button" id="remover3" value="remover" disabled />
+            </div>
+        </div>
+        <BR/>
+        <input id="fecharGaleria" type="button" value="Fechar a Galeria" />
+    </div>
+    <BR/>
+    <BR/>
+    <input type="submit" name="submit" id="submit" class="submit btn-success"/>
+</form>
+</body>
+</html>
+<script src="tools.js"></script>

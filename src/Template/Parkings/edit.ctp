@@ -6,7 +6,7 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
+        <li class="heading"><?= __('Ações') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $parking->id],
@@ -21,9 +21,9 @@
 <div class="parkings form large-9 medium-8 columns content">
     <?= $this->Form->create($parking) ?>
     <fieldset>
-        <legend><?= __('Edit Parking') ?></legend>
+        <legend><?= __('Editar o quarto') ?></legend>
         <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
+            echo $this->Form->control('owner_id', ['options' => $users]);
             echo $this->Form->control('address');
             echo $this->Form->control('number');
             echo $this->Form->control('zipcode');

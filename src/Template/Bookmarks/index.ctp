@@ -8,13 +8,13 @@ $user_data = $session->read('Auth.User');
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
+        <li class="heading"><?= __("A\u{00e7}\u{00f5}es") ?></li>
         <li><?= $this->Html->link(__('New Bookmark'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('My Bookmarks'), ['action' => 'my']) ?></li>
         <li><?= $this->Html->link(__('My Cars'), ['controller' => 'Cars', 'action' => 'index']) ?></li>
-        <?php if($user_data['type']=='admin') : ?>
+        <?php if($user_data["role"]==="admin"): ?>
             <li><?= $this->Html->link(__('All Cars'), ['controller' => 'Cars', 'action' => 'all']) ?></li>
-		<?php endif; ?>
+        <?php endif; ?>
     </ul>
     <div style="margin-top:100px">
         <?php
@@ -61,28 +61,26 @@ $user_data = $session->read('Auth.User');
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('title') ?></th>
-				<th scope="col"><?= $this->Paginator->sort('description') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('título') ?></th>
+				<th scope="col"><?= $this->Paginator->sort('descrição') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col" class="actions"><?= __("Ações") ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($bookmarks as $bookmark): ?>
             <tr>
-                <td><?= $this->Number->format($bookmark->id) ?></td>
-                <td><?= $bookmark->has('user') ? $this->Html->link($bookmark->user->id, ['controller' => 'Users', 'action' => 'view', $bookmark->user->id]) : '' ?></td>
                 <td><?= h($bookmark->title) ?></td>
 				<td><?= h($bookmark->description) ?></td>
                 <td><?= h($bookmark->created) ?></td>
                 <td><?= h($bookmark->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $bookmark->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bookmark->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bookmark->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bookmark->id)]) ?>
+                    <?php if($user_data["role"]==="admin"): ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bookmark->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bookmark->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bookmark->id)]) ?>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

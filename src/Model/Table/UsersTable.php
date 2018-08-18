@@ -6,10 +6,14 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\Log\Log;
 /**
  * Users Model
  *
  * @property \App\Model\Table\BookmarksTable|\Cake\ORM\Association\HasMany $Bookmarks
+ * @property \App\Model\Table\ParkingsTable|\Cake\ORM\Association\HasMany $Parkings
+ * @property \App\Model\Table\ParkingsTable|\Cake\ORM\Association\HasMany $Lots
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -43,6 +47,18 @@ class UsersTable extends Table
         $this->hasMany('Bookmarks', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Parkings', [
+            'foreignKey' => 'owner_id'
+        ]);
+        //$this->hasMany('Lots', [
+        //    'foreignKey' => 'client_id'
+       // ]);
+        $this->hasMany('Lots', [
+            'className' => 'Parkings',
+            'foreignKey' => 'client_id'
+        ])
+        ->setProperty('alugueis');
+        
     }
 
     /**
@@ -70,10 +86,62 @@ class UsersTable extends Table
             ->notEmpty('password');
             
         $validator
-            ->requirePresence('name', 'create')
-            ->maxLength('name', 100)
-            ->notEmpty('name');
+            ->requirePresence('username', 'create')
+            ->maxLength('username', 15)
+            ->notEmpty('username');
 
+        return $validator;
+    }
+	
+	public function validationPassword(Validator $validator)
+    {
+        $validator
+                ->add('old_password','custom',[
+                    'rule' => function($value, $context){
+                        $user = $this->get($context['data']['id']);
+                        if($user)
+                        {
+                            if((new DefaultPasswordHasher)->check($value, $user->password))
+                            {
+                                return true;
+                            }
+                        }
+                        return false;
+                    },
+                    'message' => 'Your old password does not match the entered password!',
+                ])
+                ->notEmpty('old_password');
+        
+        $validator
+                ->add('new_password',[
+                    'length' => [
+                        'rule' => ['minLength',4],
+                        'message' => 'Please enter at least 4 characters in password your password.'
+                    ]
+                ])
+                ->add('new_password',[
+                    'match' => [
+                        'rule' => ['compareWith','confirm_password'],
+                        'message' => 'Sorry! Password dose not match. Please try again!'
+                    ]
+                ])
+                ->notEmpty('new_password');
+        
+        $validator
+                ->add('confirm_password',[
+                    'length' => [
+                        'rule' => ['minLength',4],
+                        'message' => 'Please enter at least 4 characters in password your password.'
+                    ]
+                ])
+                ->add('confirm_password',[
+                    'match' => [
+                        'rule' => ['compareWith','new_password'],
+                        'message' => 'Sorry! Password dose not match. Please try again!'
+                    ]
+                ])
+                ->notEmpty('confirm_password');
+        
         return $validator;
     }
 

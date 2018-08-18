@@ -47,12 +47,12 @@ class ParkingsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
+            'foreignKey' => 'owner_id',
             'joinType' => 'INNER'
         ]);
         
 		$this->searchManager()
-            ->value('user_id')
+            ->value('owner_id')
             ->add('Pesquisar', 'Search.Like', [
                 'before' => true,
                 'after' => true,
@@ -96,11 +96,11 @@ class ParkingsTable extends Table
             ->allowEmpty('zipcode');
 
         $validator
-            ->integer('lat')
+            ->float('lat')
             ->allowEmpty('lat');
 
         $validator
-            ->integer('lng')
+            ->float('lng')
             ->allowEmpty('lng');
 
         return $validator;
@@ -115,7 +115,7 @@ class ParkingsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['owner_id'], 'Users'));
 
         return $rules;
     }

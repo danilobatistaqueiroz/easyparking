@@ -6,22 +6,21 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Bookmarks'), ['controller' => 'Bookmarks', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Bookmark'), ['controller' => 'Bookmarks', 'action' => 'add']) ?></li>
+        <li class="heading"><?= __("A\u{00e7}\u{00f5}es") ?></li>
+        <li><?= $this->Html->link(__('Pesquise por estacionamentos'), ['controller' => 'Parkings', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
-        <legend><?= __('Add User') ?></legend>
+        <legend><?= __('Cadastro') ?></legend>
         <?php
-            echo $this->Form->control('email');
-            echo $this->Form->control('password');
-            echo $this->Form->control('name');
+            echo $this->Form->control('email', ['label'=>'Seu email']);
+            echo $this->Form->control('password', ['label'=>"Sua senha"]);
+            echo $this->Form->control('confirm_password', ['label'=>"Confirme a senha", 'required'=>'true']);
+            echo $this->Form->control('name', ['label'=>"Seu nome"]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Cadastrar')) ?>
     <?= $this->Form->end() ?>
 </div>

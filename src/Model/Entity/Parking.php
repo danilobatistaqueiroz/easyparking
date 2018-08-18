@@ -7,16 +7,19 @@ use Cake\ORM\Entity;
  * Parking Entity
  *
  * @property int $id
- * @property int $user_id
+ * @property int $owner_id
+ * @property int $client_id
  * @property string $description
  * @property string $address
  * @property int $number
  * @property string $zipcode
+ * @property string $city
  * @property string $stateOrProvince
  * @property string $complement
  * @property string $neighbourhoods
- * @property int $lat
- * @property int $lng
+ * @property float $lat
+ * @property float $lng
+ * @property int $available
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
@@ -35,11 +38,13 @@ class Parking extends Entity
      * @var array
      */
     protected $_accessible = [
-        'user_id' => true,
+        'owner_id' => true,
+        'client_id' => true,
         'description' => true,
         'address' => true,
         'number' => true,
         'zipcode' => true,
+		'city' => true,
         'stateOrProvince' => true,
         'complement' => true,
         'neighbourhoods' => true,
@@ -47,6 +52,7 @@ class Parking extends Entity
         'lng' => true,
         'created' => true,
         'modified' => true,
-        'user' => true
+        'user' => true,
+        'available' => true
     ];
 }

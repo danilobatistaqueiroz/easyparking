@@ -30,6 +30,40 @@ use Cake\Log\Log;
 class AppController extends Controller
 {
 
+	public function estados()
+	{
+		$es = 
+		[
+		'AC'=>'AC',
+		'AL'=>'AL',
+		'AP'=>'AP',
+		'AM'=>'AM',
+		'BA'=>'BA',
+		'CE'=>'CE',
+		'DF'=>'DF',
+		'ES'=>'ES',
+		'GO'=>'GO',
+		'MA'=>'MA',
+		'MT'=>'MT',
+		'MS'=>'MS',
+		'MG'=>'MG',
+		'PA'=>'PA',
+		'PB'=>'PB',
+		'PR'=>'PR',
+		'PE'=>'PE',
+		'PI'=>'PI',
+		'RJ'=>'RJ',
+		'RN'=>'RN',
+		'RS'=>'RS',
+		'RO'=>'RO',
+		'RR'=>'RR',
+		'SC'=>'SC',
+		'SP'=>'SP',
+		'SE'=>'SE',
+		'TO'=>'TO'
+		];
+		return $es;
+	}
     /**
      * Initialization hook method.
      *
@@ -46,6 +80,7 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 		$this->loadComponent('Search.Prg', ['actions'=>'index','lookup']);
+
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -55,7 +90,7 @@ class AppController extends Controller
 		
 		
 		$this->loadComponent('Auth', [
-			//'authorize' => 'Controller',
+			'authorize' => 'Controller',
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -76,9 +111,15 @@ class AppController extends Controller
         $this->Auth->allow(['display','login','logout']);
     }
 	
-	/*public function isAuthorized($user)
+	public function limparLogDebug(){
+		$myfile = fopen("F:\\php\\frameworks\\cakePhp\\bookmarker\\logs\\debug.log", "w");
+		fwrite($myfile, " ");
+		fclose($myfile);
+	}
+	
+	public function isAuthorized($user)
 	{
 		return false;
-	}*/
+	}
 	
 }

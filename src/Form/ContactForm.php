@@ -19,11 +19,14 @@ class ContactForm extends Form
     public function validationDefault(Validator $validator)
     {
         $validator->add('name', 'length', [
-                'rule' => ['minLength', 10],
+                'rule' => ['minLength', 3],
                 'message' => 'A name is required'
             ])->add('email', 'format', [
                 'rule' => 'email',
                 'message' => 'A valid email address is required',
+            ])->add('body', 'length', [
+                'rule' => ['minLength', 5],
+                'message' => 'O texto deve conter no mínimo 5 caracteres'
             ]);
 
         return $validator;
@@ -34,4 +37,10 @@ class ContactForm extends Form
         // Send an email.
         return true;
     }
+	
+	public function setErrors($errors)
+	{
+		$this->_errors = $errors;
+	}
+	
 }

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e777caf54cd59a0f81049b48f54c6db",
+    "content-hash": "2c2dbd2e36af28b8a451f9d07b782584",
     "packages": [
         {
             "name": "aura/intl",
@@ -51,6 +51,37 @@
                 "localization"
             ],
             "time": "2017-01-20T05:00:11+00:00"
+        },
+        {
+            "name": "cakephp-brasil/twitter-bootstrap",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CakePHPBrasil/TwitterBootstrap.git",
+                "reference": "e425c16683d1e4dbb2b4f04d15de46e23512f8c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CakePHPBrasil/TwitterBootstrap/zipball/e425c16683d1e4dbb2b4f04d15de46e23512f8c3",
+                "reference": "e425c16683d1e4dbb2b4f04d15de46e23512f8c3",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.0",
+                "php": ">=5.4.16"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "TwitterBootstrap\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "TwitterBootstrap plugin for CakePHP 3",
+            "time": "2016-05-25T20:29:28+00:00"
         },
         {
             "name": "cakephp/cakephp",

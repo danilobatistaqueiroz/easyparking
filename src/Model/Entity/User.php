@@ -8,13 +8,20 @@ use Cake\Auth\DefaultPasswordHasher;
  * User Entity
  *
  * @property int $id
- * @property string $email
+ * @property string $username
  * @property string $password
- * @property string $name
- * @property \Cake\I18n\FrozenTime $created
+ * @property string $email
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $role
+ * @property string $passkey
+ * @property string $timeout
  * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\FrozenTime $created
  *
  * @property \App\Model\Entity\Bookmark[] $bookmarks
+ * @property \App\Model\Entity\Parking[] $parkings
+ * @property \App\Model\Entity\Parking[] $lots
  */
 class User extends Entity
 {
@@ -29,13 +36,19 @@ class User extends Entity
      * @var array
      */
     protected $_accessible = [
-        'email' => true,
+        'username' => true,
         'password' => true,
-        'name' => true,
-        'type' => true,
-        'created' => true,
+        'email' => true,
+        'first_name' => true,
+        'last_name' => true,
+        'role' => true,
+        'passkey' => true,
+        'timeout' => true,
         'modified' => true,
-        'bookmarks' => true
+        'created' => true,
+        'bookmarks' => true,
+        'parkings' => true,
+        'lots' => true
     ];
 
     /**

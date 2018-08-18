@@ -6,7 +6,7 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
+        <li class="heading"><?= __(Actions) ?></li>
         <li><?= $this->Html->link(__('Edit Bookmark'), ['action' => 'edit', $bookmark->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Bookmark'), ['action' => 'delete', $bookmark->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bookmark->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Bookmarks'), ['action' => 'index']) ?> </li>
@@ -42,7 +42,7 @@
         </tr>
     </table>
     <div class="row">
-        <h4><?= __('Description') ?></h4>
+        <h4><?= __(Description) ?></h4>
         <?= $this->Text->autoParagraph(h($bookmark->description)); ?>
     </div>
     <div class="row">

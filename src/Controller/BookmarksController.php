@@ -24,7 +24,7 @@ class BookmarksController extends AppController
      */
     public function index()
     {
-        
+        Log::write('debug','index');
         $this->paginate = [
             'contain' => ['Users'],
 			'maxLimit' => 7
@@ -32,7 +32,7 @@ class BookmarksController extends AppController
         
         //$bookmarks = $this->paginate($this->Bookmarks);
 		
-		//$query = $this->Bookmarks->find('search', ['search' => $this->request->getQueryParams()]);
+		$query = $this->Bookmarks->find('search', ['search' => $this->request->getQueryParams()]);
 		//Log::write('debug'," ");
 		//Log::write('debug',"query::".$query);
 		//Log::write('debug'," \r\n ");
@@ -105,7 +105,7 @@ class BookmarksController extends AppController
         $bookmark = $this->Bookmarks->get($id, [
             'contain' => ['Users', 'Tags']
         ]);
-
+		
         $this->set('bookmark', $bookmark);
     }
 
@@ -198,6 +198,7 @@ class BookmarksController extends AppController
 
 	public function isAuthorized($user)
 	{
+		Log::write('debug','isAuthorized');
 		$action = $this->request->getParam('action');
 
 		// The add and index actions are always allowed.

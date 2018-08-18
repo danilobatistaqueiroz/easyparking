@@ -14,7 +14,7 @@
     </ul>
 </nav>
 <div class="parkings form large-9 medium-8 columns content">
-    <?= $this->Form->create($parking, ['enctype' => 'multipart/form-data', 'type' => 'file']) ?>
+    <?= $this->Form->create($parking, ['enctype' => 'multipart/form-data']) ?>
     <fieldset>
         <legend><?= __('Cadastrar um Estacionamento') ?></legend>
         <?php
@@ -24,6 +24,7 @@
             echo $this->Form->control('complement', ['label'=> "Complemento"]);
             echo $this->Form->control('zipcode', ['label'=> "Cep"]);
             echo $this->Form->control('city', ['label'=> "Cidade", 'value'=>"S\u{00e3}o Paulo"]);
+            echo $this->Form->control('available', ['label'=> "Disponível", 'value'=>"true"]);
             echo $this->Form->control('stateOrProvince', ['options' => ['AL','AM','AP','AC','BA','ES','GO','SP','MG','PR','RS','SC','RJ','RO','RM'], 'label'=> 'Estado', 'value'=>'7']);
             echo $this->Form->control('references', ['label'=> "Refer\u{00ea}ncias [para facilitar a localiza\u{00e7}\u{00e3}o]"]);
             
