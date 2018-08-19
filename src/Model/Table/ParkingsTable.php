@@ -96,11 +96,13 @@ class ParkingsTable extends Table
             ->allowEmpty('zipcode');
 
         $validator
-            ->float('lat')
+            ->add('lat', 'numeric', array('rule' => 'numeric',
+                'message' => 'Only numbers are allowed'))
             ->allowEmpty('lat');
 
         $validator
-            ->float('lng')
+            ->add('lng', 'numeric', array('rule' => 'numeric',
+                'message' => 'Only numbers are allowed'))
             ->allowEmpty('lng');
 
         return $validator;

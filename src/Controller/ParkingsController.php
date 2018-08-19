@@ -76,9 +76,20 @@ class ParkingsController extends AppController
 
     public function solicitar(){
         Log::write('debug', 'Solicitar');
-        $this->Flash->set('Solicitação enviada para o dono.', [
-            'element' => 'success'
-        ]);
+        if ($this->request->is(['put'])) {
+            $parking = $this->Parkings->newEntity();
+            Log::write('debug', $this->request->getData('id'));
+            Log::write('debug', $this->Auth->user('id'));
+
+            $parking->id = $this->request->getData('id');
+            $parking->available = 0;
+            $parking->request_userid = $this->Auth->user('id');
+            if ($this->Parkings->save($parking)) {
+                $this->Flash->set('Solicitação enviada para o dono.', [
+                'element' => 'success'
+                ]);
+            }
+        }
         $this->setAction('index');
     }
     /**
@@ -89,30 +100,30 @@ class ParkingsController extends AppController
     public function add()
     {
         $parking = $this->Parkings->newEntity();
-	$estados = $this->estados();
+	    $estados = $this->estados();
         if ($this->request->is('post')) {
             $parking = $this->Parkings->patchEntity($parking, $this->request->getData());
             $parking->owner_id = $this->Auth->user('id');
             if ($this->Parkings->save($parking)) {
                 Log::write('debug', $parking->id);
-                Log::write('debug', $this->request->getData('upload'));
-                Log::write('debug', $this->request->getData('upload')['name']);
-		$this->addImage($parking);
-                $this->Flash->success(__('O estacionamento foi salvo.'));
+                Log::write('debug', $this->request->getData('upload1'));
+                Log::write('debug', $this->request->getData('upload1')['name']);
+		        $this->addImage($parking);
+                $this->Flash->success(__('O quarto foi salvo.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The parking could not be saved. Please, try again.'));
         }
         $users = $this->Parkings->Users->find('list', ['limit' => 200]);
-	$this->set(compact('estados', $estados));
+	    $this->set(compact('estados', $estados));
         $this->set(compact('parking', 'users'));
     }
     
     private function addImage($parking)
     {
-        if(!empty($this->request->getData('upload')['name']))
+        if(!empty($this->request->getData('upload1')['name']))
         {
-            $file = $this->request->getData('upload'); //put the data into a var for easy use
+            $file = $this->request->getData('upload1'); //put the data into a var for easy use
             $ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
             $arr_ext = array('jpg', 'jpeg', 'gif', 'png', 'ico'); //set allowed extensions
             if(in_array($ext, $arr_ext))

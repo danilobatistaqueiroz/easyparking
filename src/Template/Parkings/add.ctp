@@ -5,11 +5,13 @@
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
+    <ul class="side-nav" style="margin-top:60px">
+        <!--
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Parkings'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        -->
     </ul>
     <div>
         <?php
@@ -58,7 +60,7 @@
 			echo $this->Form->control('lat', ['type' => 'hidden']);
 			echo $this->Form->control('lng', ['type' => 'hidden']);
             echo $this->Form->control('city', ['label'=> "Cidade", 'value'=>"S\u{00e3}o Paulo", 'maxLength'=>'30']);
-            echo $this->Form->control('available', ['label'=> "Disponível", 'value'=>"true"]);
+            echo $this->Form->control('available', ['options'=>['1'=>'Sim','0'=>'Não'], 'label'=>"Disponível", 'value'=>'Sim']);
             echo $this->Form->control('stateOrProvince', ['options' => $estados, 'label'=> 'Estado', 'value'=>'SP']);
             echo $this->Form->control('neighbourhoods', ['label'=> "Refer\u{00ea}ncias [para facilitar a localiza\u{00e7}\u{00e3}o]", 'maxLength'=>'100']);
             echo $this->Form->control('upload1', array('id' => 'upload1', 'type' => 'file'));
@@ -67,39 +69,6 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
-<script>
-	function getLatLng(address){
-		var geocoder = new google.maps.Geocoder();
-		geocoder.geocode({ 'address': address }, function (results, status) {
-
-			if (status == google.maps.GeocoderStatus.OK) {
-				var latitude = results[0].geometry.location.lat();
-				var longitude = results[0].geometry.location.lng();
-				document.getElementById('lat').value = latitude;
-				document.getElementById('lng').value = longitude;
-				
-				var map = new google.maps.Map(document.getElementById('map_canvas'), {
-				  zoom: 16,
-				  center: {lat: latitude, lng: longitude}
-				});
-
-				var marker = new google.maps.Marker({
-				  position: {lat: latitude, lng: longitude},
-				  map: map,
-				  title: 'Hello World!'
-				});
-			}
-		});
-	}
-	function getLatLngFromAddr(){
-		var address = document.getElementById('address').value+', '+document.getElementById('number').value;
-		getLatLng(address);
-	}
-	function getLatLngFromZip(){
-		var address = document.getElementById('address').value;
-		var zip = document.getElementById('zipcode').value;
-		var latitude = document.getElementById('lat').value;
-		if(latitude==false || address==false)
-			getLatLng(zip);
-	}
-</script>
+<?php 
+    echo $this->Html->script('addParkings');
+?>

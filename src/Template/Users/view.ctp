@@ -47,6 +47,35 @@
             <td><?= h($user->modified) ?></td>
         </tr>
     </table>
+    <?php if (!empty($user->pedidos)): ?>
+        <div class="related">
+            <h4><?= __('Suas Solicitações') ?></h4>
+            <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('') ?></th>
+                <th scope="col"><?= __(Description) ?></th>
+                <th scope="col"><?= __(Endereco) ?></th>
+                <th scope="col"><?= __('Alugada') ?></th>
+                <th scope="col"><?= __('Valor') ?></th>
+                <th scope="col" class="actions"><?= __(Actions) ?></th>
+            </tr>
+            <?php foreach ($user->pedidos as $request): ?>
+            <tr>
+                <td><?= $this->Html->image($this->Link->url_mini($request->id)) ?></td>
+                <td><?= h(substr($request->description,0,50)."...") ?></td>
+                <td><?= h($request->address) ?></td>
+                <td><?= h($request->title) ?></td>
+                <td><?= h($request->request_userid) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link('Visualizar', 'http://localhost:8765/Parkings/view/'.$request->id, ['fullbase' => true]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Parkings', 'action' => 'edit', $request->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Parkings', 'action' => 'delete', $request->id], ['confirm' => __('Are you sure you want to delete # {0}?', $request->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            </table>
+        </div>
+    <?php endif; ?>
     <div class="related">
         <h4><?= __('Seus Quartos') ?></h4>
         <?php if (!empty($user->parkings)): ?>
@@ -60,16 +89,23 @@
                 <th scope="col" class="actions"><?= __(Actions) ?></th>
             </tr>
             <?php foreach ($user->parkings as $parkings): ?>
-            <tr>
+            <tr <?php if(!empty($parkings->request_userid)) { echo "style='background-color:red'"; } ?>>
                 <td><?= $this->Html->image($this->Link->url_mini($parkings->id)) ?></td>
                 <td><?= h(substr($parkings->description,0,50)."...") ?></td>
                 <td><?= h($parkings->address) ?></td>
                 <td><?= h($parkings->created) ?></td>
                 <td><?= h($parkings->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link('Visualizar', 'http://localhost:8765/Parkings/view/'.$parkings->id, ['fullbase' => true]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Parkings', 'action' => 'edit', $parkings->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Parkings', 'action' => 'delete', $parkings->id], ['confirm' => __('Are you sure you want to delete # {0}?', $parkings->id)]) ?>
+                    <?php if (empty($parkings->request_userid)): ?>
+                        <?= $this->Html->link('Visualizar', 'http://localhost:8765/Parkings/view/'.$parkings->id, ['fullbase' => true]) ?>
+                        <?= $this->Html->link(__('Edit'), ['controller' => 'Parkings', 'action' => 'edit', $parkings->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Parkings', 'action' => 'delete', $parkings->id], ['confirm' => __('Are you sure you want to delete # {0}?', $parkings->id)]) ?>
+                    <?php endif; ?>
+                    <?php if (!empty($parkings->request_userid)): ?>
+                        <?= $this->Html->link(__('Aceitar Solicitacao'), ['controller' => 'Parkings', 'action' => 'edit', $parkings->id]) ?>
+                        <BR/>
+                        <?= $this->Html->link(__('Recusar Solicitacao'), ['controller' => 'Parkings', 'action' => 'edit', $parkings->id]) ?>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

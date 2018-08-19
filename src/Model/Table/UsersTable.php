@@ -14,6 +14,7 @@ use Cake\Log\Log;
  * @property \App\Model\Table\BookmarksTable|\Cake\ORM\Association\HasMany $Bookmarks
  * @property \App\Model\Table\ParkingsTable|\Cake\ORM\Association\HasMany $Parkings
  * @property \App\Model\Table\ParkingsTable|\Cake\ORM\Association\HasMany $Lots
+ * @property \App\Model\Table\ParkingsTable|\Cake\ORM\Association\HasMany $Requests
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -50,14 +51,18 @@ class UsersTable extends Table
         $this->hasMany('Parkings', [
             'foreignKey' => 'owner_id'
         ]);
-        //$this->hasMany('Lots', [
-        //    'foreignKey' => 'client_id'
-       // ]);
+
         $this->hasMany('Lots', [
             'className' => 'Parkings',
             'foreignKey' => 'client_id'
         ])
         ->setProperty('alugueis');
+
+        $this->hasMany('Requests', [
+            'className' => 'Parkings',
+            'foreignKey' => 'request_userid'
+        ])
+        ->setProperty('pedidos');
         
     }
 

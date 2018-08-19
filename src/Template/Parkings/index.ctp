@@ -7,11 +7,11 @@ $session = $this->request->getSession();
 $user_data = $session->read('Auth.User');
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
+    <!--ul class="side-nav">
         <li class="heading"><?= __('Ações') ?></li>
         <li><?= $this->Html->link(__('Encontre um quarto'), ['controller'=>'Parkings','action' => 'index']) ?></li>
-    </ul>
-    <div>
+    </ul-->
+    <div style="margin-top:50px">
         <?php
           $map_options = array(
             'id' => 'map_canvas',

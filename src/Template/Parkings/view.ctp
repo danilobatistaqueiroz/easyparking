@@ -5,7 +5,7 @@
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
+    <!--ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Parking'), ['action' => 'edit', $parking->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Parking'), ['action' => 'delete', $parking->id], ['confirm' => __('Are you sure you want to delete # {0}?', $parking->id)]) ?> </li>
@@ -13,7 +13,7 @@
         <li><?= $this->Html->link(__('New Parking'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-    </ul>
+    </ul-->
 </nav>
 <div class="parkings view large-9 medium-8 columns content">
     <h3><?= h($parking->id) ?></h3>
@@ -55,14 +55,16 @@
             <td><?= h($parking->modified) ?></td>
         </tr>
     </table>
-    <?= $this->Form->create(null, ['type' => 'put', 'url' => ['controller' => 'Parkings', 'action' => 'solicitar']]) ?>
+    <?= $this->Form->create(null, ['type' => 'put', 
+    'url' => ['controller' => 'Parkings', 'action' => 'solicitar']]) ?>
     <fieldset>
         <?php
             echo $this->Form->control('owner_id', ['type' => 'hidden']);
-            echo $this->Form->control('id', ['type' => 'hidden']);
+            echo $this->Form->control('id', ['type' => 'hidden', 'value' => $parking->id]);
             echo $this->Form->control('solicitar', ['type' => 'hidden', 'value' => 'aluguel']);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button('Solicitar aluguel', ['type' => 'submit']) ?>
     <?= $this->Form->end() ?>
 </div>
+

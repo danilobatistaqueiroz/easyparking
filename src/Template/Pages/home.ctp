@@ -74,7 +74,7 @@ $cakeDescription = 'Quartos : Encontre um quarto ou ganhe dinheiro com seu quart
             </ul>
         </div>
     </nav>
-
+    <?= $this->Flash->render() ?>
 
 </body>
 </html>

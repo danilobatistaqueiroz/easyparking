@@ -22,6 +22,7 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property \App\Model\Entity\Bookmark[] $bookmarks
  * @property \App\Model\Entity\Parking[] $parkings
  * @property \App\Model\Entity\Parking[] $lots
+ * @property \App\Model\Entity\Parking[] $requests
  */
 class User extends Entity
 {
@@ -48,7 +49,8 @@ class User extends Entity
         'created' => true,
         'bookmarks' => true,
         'parkings' => true,
-        'lots' => true
+        'lots' => true,
+        'requests' => true
     ];
 
     /**

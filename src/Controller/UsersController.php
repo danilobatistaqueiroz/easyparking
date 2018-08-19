@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use Cake\Log\Log;
 use Cake\Routing\Router;
 use Cake\Mailer\Email;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Users Controller
@@ -36,6 +37,7 @@ class UsersController extends AppController
     {
         $users = $this->paginate($this->Users);
         $this->set(compact('users'));
+        Log::write('debug', 'ola');
     }
 
     public function changePassword()
@@ -145,7 +147,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Bookmarks','Parkings','Lots']
+            'contain' => ['Bookmarks','Parkings','Lots','Requests']
         ]);
 
         //Log::write('debug',var_dump($user->lots));
@@ -223,6 +225,12 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+                $conn = ConnectionManager::get('default');
+                $stmt = $conn->execute("SELECT count(1) as total FROM parkings WHERE owner_id = " . $user['id'] . " and request_userid is not null and request_userid != 0 and request_userid != ''");
+                $count = $stmt->fetch('assoc');
+                Log::write('debug', $count['total']);
+                $this->Flash->default('Você tem novas solicitações de aluguel');
+                Log::write('debug', $this->Auth->redirectUrl());
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');

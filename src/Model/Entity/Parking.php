@@ -20,6 +20,7 @@ use Cake\ORM\Entity;
  * @property float $lat
  * @property float $lng
  * @property int $available
+ * @property int $request_userid
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
@@ -53,6 +54,7 @@ class Parking extends Entity
         'created' => true,
         'modified' => true,
         'user' => true,
-        'available' => true
+        'available' => true,
+        'request_userid' => true
     ];
 }
